@@ -1,0 +1,27 @@
+POST https://trial-login-flow.betty.app/api/runtime/d4bdceb882f145569e5ea24b6198ba06
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    allTestUser {
+        results {
+            id
+            name
+        }
+    }
+}
+
+###
+
+# POST https://trial-login-flow.betty.app/api/runtime/d4bdceb882f145569e5ea24b6198ba06
+# Content-Type: application/json
+# X-Request-Type: GraphQL
+
+# {
+#     allTestUser {
+#         results {
+#             id
+#             name
+#         }
+#     }
+# }
