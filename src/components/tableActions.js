@@ -15,7 +15,7 @@
     } = window.MaterialUI.Core;
 
     const { env, Icon, Children } = B;
-    const { isMenuListVisible = true } = options;
+    const { isDropdownVisible, outerSpacing, size, disabled } = options;
 
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -52,9 +52,15 @@
     };
 
     const IconComponent = (
-      <span className={classes.dots} onClick={handleToggle} ref={buttonRef}>
+      <IconButton
+        className={classes.dots}
+        onClick={handleToggle}
+        ref={buttonRef}
+        disabled={disabled}
+        size={size}
+      >
         <Icon name="MoreHoriz" />
-      </span>
+      </IconButton>
     );
 
     const MenuComp = (
@@ -84,7 +90,7 @@
             </Grow>
           </Popper>
         ) : (
-          isMenuListVisible && (
+          isDropdownVisible && (
             <Paper
               className={classes.paper}
               style={{
@@ -115,12 +121,21 @@
     const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(t);
 
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+
     const isDev = env === 'dev';
 
     return {
       root: {},
       dots: {
         cursor: 'pointer',
+        // color: ['#333', '!important'],
+
+        color: ({ options: { disabled } }) => [
+          !disabled ? ['#333', '!important'] : 'rgba(0, 0, 0, 0.26)',
+          '!important',
+        ],
 
         ...(isDev && {
           pointerEvents: ['unset', '!important'],
@@ -130,6 +145,16 @@
         display: 'inline-block',
         width: 'auto',
         minHeight: '1rem',
+
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+
         '& button': {
           pointerEvents: 'none',
         },
@@ -150,11 +175,11 @@
         padding: '0 0.4rem',
         minWidth: '5rem',
         minHeight: '2rem',
-        // backgroundColor: ({ options: { menuColor } }) => [
-        //   style.getColor(menuColor),
-        //   '!important',
-        // ],
-        backgroundColor: ['white', '!important'],
+        backgroundColor: ({ options: { menuColor } }) => [
+          style.getColor(menuColor),
+          '!important',
+        ],
+        // backgroundColor: ['white', '!important'],
         ...(isDev && {
           position: 'relative',
           pointerEvents: ['unset', '!important'],
