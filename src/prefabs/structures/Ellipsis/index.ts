@@ -1,11 +1,11 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import {
-  tableActionsOptions as defaultOptions,
+  ellipsisOptions as defaultOptions,
   categories as defaultCategories,
 } from './options';
 
-export const TableActions = (
+export const Ellipsis = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
@@ -18,7 +18,7 @@ export const TableActions = (
     : defaultCategories;
 
   return component(
-    'TableActions',
+    'Ellipsis',
     { options, ref, style, label, optionCategories },
     descendants,
   );
