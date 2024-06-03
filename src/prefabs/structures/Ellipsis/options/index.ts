@@ -4,7 +4,6 @@ import {
   option,
   sizes,
   toggle,
-  variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -16,7 +15,7 @@ export const categories = [
   },
 ];
 
-export const tableActionsOptions = {
+export const ellipsisOptions = {
   isDropdownVisible: toggle('Toggle menu', {
     value: true,
     configuration: { as: 'VISIBILITY' },
@@ -27,12 +26,13 @@ export const tableActionsOptions = {
   }),
 
   size: option('CUSTOM', {
-    value: 'small',
+    value: 'medium',
     label: 'Icon Size',
     configuration: {
       as: 'BUTTONGROUP',
       dataType: 'string',
       allowedInput: [
+        { name: 'Large', value: 'large' },
         { name: 'Medium', value: 'medium' },
         { name: 'Small', value: 'small' },
       ],
@@ -40,8 +40,9 @@ export const tableActionsOptions = {
   }),
 
   menuColor: color('Menu color', { value: ThemeColor.WHITE }),
+  iconColor: color('Icon color', { value: ThemeColor.BLACK }),
 
   disabled: toggle('Disabled', { value: false }),
 
-  ...advanced('TableActions'),
+  ...advanced('Ellipsis'),
 };
